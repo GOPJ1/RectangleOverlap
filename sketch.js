@@ -57,12 +57,12 @@ function draw() {
 function keyPressed(){
     
     //If an a was pressed check for an overlap
-    if( key == "a" ){
+    if( key == "a" ||key == "A"){
         overlap();
     }
     
     //If the n key was pressed, update our rectangles
-    if( key == "n"){
+    if( key == "n" || key == "N"){
         blue.updateRectangle();
         red.updateRectangle();
     }
@@ -129,6 +129,9 @@ function overlap(){
         if( blue.isRightOf(redX1, redX2) ){
             if( blue.isAbove(redY1, redY2) ){
                 overlapAlert(blueX1, redX2, redY1, blueY2);
+            }
+            else{
+                overlapAlert(blueX1, redX2, blueY1, redY2);
             }
         }
     }
