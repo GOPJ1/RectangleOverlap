@@ -93,8 +93,8 @@ class Rectangle{
     * 
     * @return {boolean}
     **/
-    isRightOf(firstX, secondX){
-        if( this.x > firstX && this.getX2() > secondX){
+    isRightOf(firstX){
+        if( this.x > firstX){
             return true;
         }
         return false;
@@ -108,8 +108,8 @@ class Rectangle{
     *
     * @return {boolean}
     **/
-    isAbove(firstY, secondY){
-        if(this.y < firstY && this.getY2() < secondY ){
+    isAbove(firstY){
+        if(this.y < firstY){
            return true;
         }
         return false;

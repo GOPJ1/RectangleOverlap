@@ -115,61 +115,69 @@ function overlap(){
         return;
     }
     else{
+        foundOverlap = findOverlap();
+        overlapAlert(foundOverlap.getX1(), foundOverlap.getX2(), foundOverlap.getY1(), foundOverlap.getY2());
+    }
+    
+}
 
-        if( red.isEncased(blueX1, blueX2, blueY1, blueY2) ){
-            overlapAlert(redX1, redX2, redY1, redY2);
-            return;
+function findOverlap(){
+    
+    if( red.isEncased(blueX1, blueX2, blueY1, blueY2) ){
+        return new OverlapPoints(redX1, redX2, redY1, redY2);
+    }
+
+    if( blue.isEncased(redX1, redX2, redY1, redY2) ){
+        return new OverlapPoints(blueX1, blueX2, blueY1, blueY2);
+    }
+
+    if( blue.isRightOf(redX1) ){
+
+        if( blue.isContainedVertically(redY1, redY2) ){
+            return new OverlapPoints(blueX1, redX2, blueY1, blueY2);
         }
-        
-        if( blue.isEncased(redX1, redX2, redY1, redY2) ){
-            overlapAlert(blueX1, blueX2, blueY1, blueY2);
-            return;
+
+        else if( blue.isAbove(redY1) ){
+
+            if( blue.isContainedHorizontally(redX1, redX2) ){
+                return new OverlapPoints(blueX1, blueX2, redY1, blueY2);
+            }
+
+            return new OverlapPoints(blueX1, redX2, redY1, blueY2);
         }
-        
-        if( blue.isRightOf(redX1, redX2) ){
-            
-            if( blue.isContainedVertically(redY1, redY2) ){
-                overlapAlert(blueX1, redX2, blueY1, blueY2);
-            }
-            else if( blue.isAbove(redY1, redY2) ){
-                
-                if( blue.isContainedHorizontally(redX1, redX2) ){
-                    overlapAlert(blueX1, blueX2, redY1, blueY2);
-                }
-                overlapAlert(blueX1, redX2, redY1, blueY2);
-            }
-            else{
-                
-                if( blue.isContainedHorizontally(redX1, redX2) ){
-                    overlapAlert(blueX1, blueX2, blueY1, redY2);
-                }
-                else{
-                    overlapAlert(blueX1, redX2, blueY1, redY2);  
-                }
-            }
-        }
-        
         else{
-            if( red.isContainedVertically(blueY1, blueY2) ){
-                overlapAlert(redX1, blueX2, redY1, redY2);
-            }
-            else if( red.isAbove(blueY1, blueY2) ){
-                
-                if( red.isContainedHorizontally(blueX1, blueX2) ){
-                    overlapAlert(redX1, redX2, blueY1, blueY2);
-                }
-                
-                overlapAlert(redX1, blueX2, blueY1, redY2);
+
+            if( blue.isContainedHorizontally(redX1, redX2) ){
+                return new OverlapPoints(blueX1, blueX2, blueY1, redY2);
             }
             else{
-                if( red.isContainedHorizontally(blueX1, blueX2) ){
-                    overlapAlert(redX1, redX2, redY1, blueY2);
-                }
-                overlapAlert(redX1, blueX2, redY1, blueY2);
+                return new OverlapPoints(blueX1, redX2, blueY1, redY2);
             }
         }
     }
-    
+        
+    else{
+
+        if( red.isContainedVertically(blueY1, blueY2) ){
+            return new OverlapPoints(redX1, blueX2, redY1, redY2);
+        }
+
+        else if( red.isAbove(blueY1) ){
+
+            if( red.isContainedHorizontally(blueX1, blueX2) ){
+                return new OverlapPoints(redX1, redX2, blueY1, blueY2);
+            }
+
+            return new OverlapPoints(redX1, blueX2, blueY1, redY2);
+        }
+        else{
+
+            if( red.isContainedHorizontally(blueX1, blueX2) ){
+                return new OverlapPoints(redX1, redX2, redY1, blueY2);
+            }
+                return new OverlapPoints(redX1, blueX2, redY1, blueY2);
+        }
+    }
 }
 
 /**
