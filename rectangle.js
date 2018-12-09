@@ -7,19 +7,19 @@ class Rectangle{
         this.color = color;
     }
     
-    getx1(){
+    getX1(){
         return this.x
     }
     
-    getx2(){
+    getX2(){
         return this.x + this.width;
     }
     
-    gety1(){
+    getY1(){
         return this.y;
     }
     
-    gety2(){
+    getY2(){
         return this.y + this.height;
     }
     
@@ -44,8 +44,22 @@ class Rectangle{
     }
     
     isEncased(firstX, secondX, firstY, secondY){
-        if(firstX < this.x && secondX > this.getx2() && firstY < this.y && secondY > this.gety2()){
+        if(firstX < this.x && secondX > this.getX2() && firstY < this.y && secondY > this.getY2()){
             return true;
+        }
+        return false;
+    }
+    
+    isRightOf(firstX, secondX){
+        if( this.x > firstXX && this.getX2() > secondX){
+            return true;
+        }
+        return false;
+    }
+    
+    isAbove(firstY, secondY){
+        if(this.y > firstY && this.getY2() > secondY ){
+           return true;
         }
         return false;
     }
@@ -53,7 +67,7 @@ class Rectangle{
     display(pName){
         rect(this.x, this.y, this.width, this.height);
     
-        document.getElementById(pName).innerHTML = this.color + " rectangle: X1 = " + this.x + " | Y1 = " + this.y + " | X2 = " + this.getx2() + " | Y2 = " + this.gety2() + " | width = " + this.width + " | height = " + this.height ;
+        document.getElementById(pName).innerHTML = this.color + " rectangle: X1 = " + this.x + " | Y1 = " + this.y + " | X2 = " + this.getX2() + " | Y2 = " + this.getY2() + " | width = " + this.width + " | height = " + this.height ;
     }
     
 }

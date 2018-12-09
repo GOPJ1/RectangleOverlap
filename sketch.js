@@ -125,16 +125,16 @@ function centerCanvas(){
 function overlap(){
     
     //Get the blue rectangles coordinates
-    blueX1 = blue.getx1();
-    blueX2 = blue.getx2();
-    blueY1 = blue.gety1();
-    blueY2 = blue.gety2();
+    blueX1 = blue.getX1();
+    blueX2 = blue.getX2();
+    blueY1 = blue.getY1();
+    blueY2 = blue.getY2();
     
     //Get the red rectangles coordinates
-    redX1 = red.getx1();
-    redX2 = red.getx2();
-    redY1 = red.gety1();
-    redY2 = red.gety2();
+    redX1 = red.getX1();
+    redX2 = red.getX2();
+    redY1 = red.getY1();
+    redY2 = red.getY2();
     
     //If any opposing side of two rectangles, e.g. right vs left, is out of reach then an intersection is impossible.
     if( redX2 < blueX1 || redX1 > blueX2 || redY2 < blueY1 || redY1 > blueY2 ){
