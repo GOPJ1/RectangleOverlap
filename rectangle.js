@@ -1,4 +1,5 @@
 class Rectangle{
+    
     constructor(x, y, width, height, color){
         this.x = Math.trunc(x);
         this.y = Math.trunc(y);

@@ -2,10 +2,6 @@
 let CANVAS_HEIGHT = 500;
 let CANVAS_WIDTH = 500;
 
-//Minimum and maximum size of the rectangles
-let MINIMUM_SIZE = 50;
-let MAXIMUM_SIZE = 250;
-
 //Rectangle color constants
 let BLUE_COLOR = "blue";
 let RED_COLOR = "red";
