@@ -112,16 +112,24 @@ function overlap(){
     if( redX2 < blueX1 || redX1 > blueX2 || redY2 < blueY1 || redY1 > blueY2 ){
         
         alert("No overlap occurs.");
-        
+        return;
     }
     else{
 
         if( red.isEncased(blueX1, blueX2, blueY1, blueY2) ){
             overlapAlert(redX1, redX2, redY1, redY2);
+            return;
+        }
+        if( blue.isEncased(redX1, redX2, redY1, redY2) ){
+            overlap(blueX1, blueX2, blueY1, blueY2);
+            return;
+        
         }
         
-        else if( blue.isEncased(redX1, redX2, redY1, redY2)){
-            overlap(blueX1, blueX2, blueY1, blueY2);
+        if( blue.isRightOf(redX1, redX2) ){
+            if( blue.isAbove(redY1, redY2) ){
+                overlapAlert(blueX1, redX2, redY1, blueY2);
+            }
         }
     }
     

@@ -52,14 +52,14 @@ class Rectangle{
     }
     
     isRightOf(firstX, secondX){
-        if( this.x > firstXX && this.getX2() > secondX){
+        if( this.x > firstX && this.getX2() > secondX){
             return true;
         }
         return false;
     }
     
     isAbove(firstY, secondY){
-        if(this.y > firstY && this.getY2() > secondY ){
+        if(this.y < firstY && this.getY2() < secondY ){
            return true;
         }
         return false;
