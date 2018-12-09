@@ -21,6 +21,14 @@ class OverlapPoints{
         return this.y2;
     }
     
+    findWidth(){
+        return this.x2 - this.x1;
+    }
+    
+    findHeight(){
+        return this.y2 - this.y1;
+    }
+    
     equals(otherX1, otherX2, otherY1, otherY2){
         if( this.x1 === otherX1 && this.x2 === other.x2 && this.y1 === otherY1 && this.y2 === otherY2){
             return true;

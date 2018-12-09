@@ -115,6 +115,20 @@ class Rectangle{
         return false;
     }
     
+    overExtendsHorizontally(firstX, secondX){
+        if( this.x < firstX && this.getX2() > secondX){
+            return true;
+        }
+        return false;
+    }
+    
+    overExtendsVertically(firstY, secondY){
+        if( this.y < firstY && this.getY2() > secondY){
+            return true;
+        }
+        return false;
+    }
+    
     /**
     * Check if this rectangle is contained vertically by another rectangle.
     * 
@@ -124,7 +138,7 @@ class Rectangle{
     * @return (boolean)
     **/
     isContainedVertically(firstY, secondY){
-        if( this.y > firstY && this.getY2() < secondY ){
+        if( this.y >= firstY && this.getY2() <= secondY ){
             return true;
         }
         return false;
@@ -139,7 +153,7 @@ class Rectangle{
     * @return (boolean)
     **/
     isContainedHorizontally(firstX, secondX){
-        if( this.x > firstX && this.getX2() < secondX ){
+        if( this.x >= firstX && this.getX2() <= secondX ){
             return true;
         }
         return false;

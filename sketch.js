@@ -15,6 +15,8 @@ var blue;
 var red;
 var cnv;
 
+var highlighted = false;
+
 /**
 * Some inital stuff to do before starting the program. We
 * need a canvas, a blue rectangle, and a red rectangle. So
@@ -25,9 +27,9 @@ function setup() {
     cnv = createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
     centerCanvas();
     
-    blue = new Rectangle(25, 25, 50, 50, BLUE_COLOR);
+    blue = new Rectangle(150, 16, 209, 168, BLUE_COLOR);
     
-    red = new Rectangle(35, 35, 15, 15, RED_COLOR);
+    red = new Rectangle(179, 16, 89, 86, RED_COLOR);
 }
 
 /**
@@ -48,6 +50,10 @@ function draw() {
     //Draw the red rectangle with the correct color
     fill( red.getColor() );
     red.display(RED_DISPLAY);
+    
+    if( highlighted ){
+        drawOverlap();
+    }
 }
 
 /**
@@ -57,15 +63,28 @@ function draw() {
 function keyPressed(){
     
     //If an a was pressed check for an overlap
-    if( key == "a" ||key == "A"){
+    if( key === "a" ||key === "A"){
         overlap();
     }
     
     //If the n key was pressed, update our rectangles
-    if( key == "n" || key == "N"){
+    if( key === "n" || key === "N"){
         blue.updateRectangle();
         red.updateRectangle();
+        highlighted = false;
     }
+    
+    if( key === "h" || key === "H"){
+        highlighted = true;
+    }
+}
+
+function drawOverlap(){
+        if( canOverlap() ){
+            var overlapAt = findOverlap();
+            fill("yellow");
+            rect( overlapAt.getX1(), overlapAt.getY1(), overlapAt.findWidth(), overlapAt.findHeight());
+        }
 }
 
 /**
@@ -96,6 +115,22 @@ function centerCanvas(){
 **/
 function overlap(){
     
+    
+    //If any opposing side of two rectangles, e.g. right vs left, is out of reach then an intersection is impossible.
+    if( !canOverlap() ){
+        
+        alert("No overlap occurs.");
+        return;
+    }
+    else{
+        foundOverlap = findOverlap();
+        overlapAlert(foundOverlap.getX1(), foundOverlap.getX2(), foundOverlap.getY1(), foundOverlap.getY2());
+    }
+    
+}
+
+function canOverlap(){
+    
     //Get the blue rectangles coordinates
     blueX1 = blue.getX1();
     blueX2 = blue.getX2();
@@ -108,20 +143,22 @@ function overlap(){
     redY1 = red.getY1();
     redY2 = red.getY2();
     
-    //If any opposing side of two rectangles, e.g. right vs left, is out of reach then an intersection is impossible.
-    if( redX2 < blueX1 || redX1 > blueX2 || redY2 < blueY1 || redY1 > blueY2 ){
-        
-        alert("No overlap occurs.");
-        return;
-    }
-    else{
-        foundOverlap = findOverlap();
-        overlapAlert(foundOverlap.getX1(), foundOverlap.getX2(), foundOverlap.getY1(), foundOverlap.getY2());
-    }
-    
+    return !(redX2 < blueX1 || redX1 > blueX2 || redY2 < blueY1 || redY1 > blueY2)
 }
 
 function findOverlap(){
+    
+    //Get the blue rectangles coordinates
+    blueX1 = blue.getX1();
+    blueX2 = blue.getX2();
+    blueY1 = blue.getY1();
+    blueY2 = blue.getY2();
+    
+    //Get the red rectangles coordinates
+    redX1 = red.getX1();
+    redX2 = red.getX2();
+    redY1 = red.getY1();
+    redY2 = red.getY2();
     
     if( red.isEncased(blueX1, blueX2, blueY1, blueY2) ){
         return new OverlapPoints(redX1, redX2, redY1, redY2);
@@ -135,6 +172,16 @@ function findOverlap(){
 
         if( blue.isContainedVertically(redY1, redY2) ){
             return new OverlapPoints(blueX1, redX2, blueY1, blueY2);
+        }
+        
+        else if( blue.overExtendsVertically(redY1, redY2) ){
+            if( blue.isContainedHorizontally(redX1, redX2) ){
+                return new OverlapPoints(blueX1, blueX2, redY1, redY2);
+                
+            }
+            else{
+                return new OverlapPoints(blueX1, redX2, redY1, redY2);
+            }
         }
 
         else if( blue.isAbove(redY1) ){
@@ -161,11 +208,19 @@ function findOverlap(){
         if( red.isContainedVertically(blueY1, blueY2) ){
             return new OverlapPoints(redX1, blueX2, redY1, redY2);
         }
-
+        else if( red.overExtendsVertically(blueY1, blueY2) ){
+            if( red.isContainedHorizontally(blueX1, blueX2) ){
+                return new OverlapPoints(redX1, redX2, blueY1, blueY2);
+                
+            }
+            else{
+                return new OverlapPoints(redX1, blueX2, blueY1, blueY2);
+            }
+        }
         else if( red.isAbove(blueY1) ){
 
             if( red.isContainedHorizontally(blueX1, blueX2) ){
-                return new OverlapPoints(redX1, redX2, blueY1, blueY2);
+                return new OverlapPoints(redX1, redX2, blueY1, redY2);
             }
 
             return new OverlapPoints(redX1, blueX2, blueY1, redY2);
