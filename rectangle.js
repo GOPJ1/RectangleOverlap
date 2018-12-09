@@ -70,4 +70,21 @@ class Rectangle{
         document.getElementById(pName).innerHTML = this.color + " rectangle: X1 = " + this.x + " | Y1 = " + this.y + " | X2 = " + this.getX2() + " | Y2 = " + this.getY2() + " | width = " + this.width + " | height = " + this.height ;
     }
     
+    updateRectangle(){
+        
+        //Generate a new height and width within the set minimum and maximum rectnalge sizes.
+        var newWidth = random(50,250);
+        var newHeight = random(50,250);
+    
+        //Create new points, ensure points are withing the canvas
+        var newX = random(CANVAS_WIDTH - newWidth);
+        var newY = random(CANVAS_HEIGHT - newHeight);
+        
+        this.setWidth(newWidth);
+        this.setHeight(newHeight);
+        this.setx(newX);
+        this.sety(newY);
+    
+    }
+    
 }

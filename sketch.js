@@ -67,33 +67,9 @@ function keyPressed(){
     
     //If the n key was pressed, update our rectangles
     if( key == "n"){
-        blue = newRectangle(BLUE_COLOR);
-        red = newRectangle(RED_COLOR);
+        blue.updateRectangle();
+        red.updateRectangle();
     }
-}
-
-/**
-* Given a color, create a new rectangle and 
-* return it
-*
-* @param {String} color Color of the new
-* rectnagle
-* 
-* @returns {Rectangle}
-**/
-function newRectangle(color){
-    
-    //Generate a new height and width within the set minimum and maximum rectnalge sizes.
-    var newWidth1 = random(50,250);
-    var newHeight1 = random(50,250);
-    
-    //Create new points, ensure points are withing the canvas
-    var newX1 = random(CANVAS_WIDTH - newWidth1);
-    var newY1 = random(CANVAS_HEIGHT - newHeight1);
-    
-    //Create the rectangle and return it
-    newRect = new Rectangle(newX1, newY1, newWidth1, newHeight1, color)
-    return newRect;
 }
 
 /**
