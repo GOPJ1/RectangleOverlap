@@ -127,7 +127,10 @@ function overlap(){
         }
         
         if( blue.isRightOf(redX1, redX2) ){
-            if( blue.isAbove(redY1, redY2) ){
+            if( blue.isContainedVertically(redY1, redY2) ){
+                overlapAlert(blueX1, redX2, blueY1, blueY2);
+            }
+            else if( blue.isAbove(redY1, redY2) ){
                 overlapAlert(blueX1, redX2, redY1, blueY2);
             }
             else{

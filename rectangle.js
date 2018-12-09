@@ -44,13 +44,6 @@ class Rectangle{
         this.height = Math.trunc(newHeight);
     }
     
-    isEncased(firstX, secondX, firstY, secondY){
-        if(firstX < this.x && secondX > this.getX2() && firstY < this.y && secondY > this.getY2()){
-            return true;
-        }
-        return false;
-    }
-    
     isRightOf(firstX, secondX){
         if( this.x > firstX && this.getX2() > secondX){
             return true;
@@ -61,6 +54,27 @@ class Rectangle{
     isAbove(firstY, secondY){
         if(this.y < firstY && this.getY2() < secondY ){
            return true;
+        }
+        return false;
+    }
+    
+    isContainedVertically(firstY, secondY){
+        if( this.y > firstY && this.getY2() < secondY ){
+            return true;
+        }
+        return false;
+    }
+    
+    isContainedHorizontally(firstX, secondX){
+        if( this.x > firstX && this.getX2() < secondX ){
+            return true;
+        }
+        return false;
+    }
+    
+    isEncased(firstX, secondX, firstY, secondY){
+        if(this.isContainedHorizontally(firstX, secondX) && this.isContainedVertically(firstY, secondY)){
+            return true;
         }
         return false;
     }
