@@ -1,9 +1,9 @@
 class Rectangle{
     constructor(x, y, width, height, color){
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        this.x = Math.trunc(x);
+        this.y = Math.trunc(y);
+        this.width = Math.trunc(width);
+        this.height = Math.trunc(height);
         this.color = color;
     }
     
@@ -43,9 +43,17 @@ class Rectangle{
         this.height = Math.trunc(newHeight);
     }
     
+    isEncased(firstX, secondX, firstY, secondY){
+        if(firstX < this.x && secondX > this.getx2() && firstY < this.y && secondY > this.gety2()){
+            return true;
+        }
+        return false;
+    }
+    
     display(pName){
         rect(this.x, this.y, this.width, this.height);
-        document.getElementById(pName).innerHTML = this.color + " rectangle: x = " + this.x + " | y = " + this.y + " | width = " + this.width + " | height = " + this.height;
+    
+        document.getElementById(pName).innerHTML = this.color + " rectangle: X1 = " + this.x + " | Y1 = " + this.y + " | X2 = " + this.getx2() + " | Y2 = " + this.gety2() + " | width = " + this.width + " | height = " + this.height ;
     }
     
 }
