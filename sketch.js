@@ -3,8 +3,8 @@ let CANVAS_HEIGHT = 500;
 let CANVAS_WIDTH = 500;
 
 //Rectangle color constants
-let BLUE_COLOR = "blue";
-let RED_COLOR = "red";
+let BLUE_COLOR = "Blue";
+let RED_COLOR = "Red";
 
 //Rectangle display constants
 let BLUE_DISPLAY = "blueP";
